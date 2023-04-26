@@ -1,0 +1,20 @@
+
+*** ChampSim Multicore Out-of-Order Simulator ***
+
+Warmup Instructions: 30000000
+Simulation Instructions: 60000000
+Number of CPUs: 1
+LLC sets: 8192
+LLC ways: 128
+Off-chip DRAM Size: 4096 MB Channels: 1 Width: 64-bit Data Rate: 3200 MT/s
+
+CPU 0 runs /home/arijit/Documents/ChampSim/traces/cryptominisat-high-30K-3577B.champsimtrace.xz
+CPU 0 Bimodal branch predictor
+Heartbeat CPU 0 instructions: 10000003 cycles: 3200990 heartbeat IPC: 3.12403 cumulative IPC: 3.12403 (Simulation time: 0 hr 0 min 33 sec) 
+Heartbeat CPU 0 instructions: 20000002 cycles: 6866230 heartbeat IPC: 2.72833 cumulative IPC: 2.91281 (Simulation time: 0 hr 1 min 15 sec) 
+Heartbeat CPU 0 instructions: 30000000 cycles: 11194756 heartbeat IPC: 2.31025 cumulative IPC: 2.67983 (Simulation time: 0 hr 1 min 57 sec) 
+
+Warmup complete CPU 0 instructions: 30000001 cycles: 11194758 (Simulation time: 0 hr 1 min 57 sec) 
+
+Heartbeat CPU 0 instructions: 40000000 cycles: 65875477 heartbeat IPC: 0.18288 cumulative IPC: 0.18288 (Simulation time: 0 hr 2 min 59 sec) 
+bimodal-no-no-no-no-random-1core-64-12-1024-8-8192-128: src/cache.cc:1502: virtual int CACHE::add_rq(PACKET*): Assertion `0' failed.
