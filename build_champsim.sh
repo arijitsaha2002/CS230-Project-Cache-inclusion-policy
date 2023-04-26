@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$#" -ne 9 ]; then
+if [ "$#" -ne 7 ]; then
     echo "Illegal number of parameters"
     echo "Usage: ./build_champsim.sh [branch_pred] [l1i_pref] [l1d_pref] [l2c_pref] [llc_pref] [llc_repl] [num_core]"
     exit 1
@@ -23,42 +23,42 @@ NORMAL=$(tput sgr0)
 # Sanity check
 if [ ! -f ./branch/${BRANCH}.bpred ]; then
     echo "[ERROR] Cannot find branch predictor"
-	echo "[ERROR] Possible branch predictors from branch/*.bpred "
+    echo "[ERROR] Possible branch predictors from branch/*.bpred "
     find branch -name "*.bpred"
     exit 1
 fi
 
 if [ ! -f ./prefetcher/${L1I_PREFETCHER}.l1i_pref ]; then
     echo "[ERROR] Cannot find L1I prefetcher"
-	echo "[ERROR] Possible L1I prefetchers from prefetcher/*.l1i_pref "
+    echo "[ERROR] Possible L1I prefetchers from prefetcher/*.l1i_pref "
     find prefetcher -name "*.l1i_pref"
     exit 1
 fi
 
 if [ ! -f ./prefetcher/${L1D_PREFETCHER}.l1d_pref ]; then
     echo "[ERROR] Cannot find L1D prefetcher"
-	echo "[ERROR] Possible L1D prefetchers from prefetcher/*.l1d_pref "
+    echo "[ERROR] Possible L1D prefetchers from prefetcher/*.l1d_pref "
     find prefetcher -name "*.l1d_pref"
     exit 1
 fi
 
 if [ ! -f ./prefetcher/${L2C_PREFETCHER}.l2c_pref ]; then
     echo "[ERROR] Cannot find L2C prefetcher"
-	echo "[ERROR] Possible L2C prefetchers from prefetcher/*.l2c_pref "
+    echo "[ERROR] Possible L2C prefetchers from prefetcher/*.l2c_pref "
     find prefetcher -name "*.l2c_pref"
     exit 1
 fi
 
 if [ ! -f ./prefetcher/${LLC_PREFETCHER}.llc_pref ]; then
     echo "[ERROR] Cannot find LLC prefetcher"
-	echo "[ERROR] Possible LLC prefetchers from prefetcher/*.llc_pref "
+    echo "[ERROR] Possible LLC prefetchers from prefetcher/*.llc_pref "
     find prefetcher -name "*.llc_pref"
     exit 1
 fi
 
 if [ ! -f ./replacement/${LLC_REPLACEMENT}.llc_repl ]; then
     echo "[ERROR] Cannot find LLC replacement policy"
-	echo "[ERROR] Possible LLC replacement policy from replacement/*.llc_repl"
+    echo "[ERROR] Possible LLC replacement policy from replacement/*.llc_repl"
     find replacement -name "*.llc_repl"
     exit 1
 fi
@@ -74,8 +74,8 @@ fi
 if [ "$NUM_CORE" -gt "1" ]; then
     echo "Building multi-core ChampSim..."
     sed -i.bak 's/\<NUM_CPUS 1\>/NUM_CPUS '${NUM_CORE}'/g' inc/champsim.h
-#	sed -i.bak 's/\<DRAM_CHANNELS 1\>/DRAM_CHANNELS 2/g' inc/champsim.h
-#	sed -i.bak 's/\<DRAM_CHANNELS_LOG2 0\>/DRAM_CHANNELS_LOG2 1/g' inc/champsim.h
+#   sed -i.bak 's/\<DRAM_CHANNELS 1\>/DRAM_CHANNELS 2/g' inc/champsim.h
+#   sed -i.bak 's/\<DRAM_CHANNELS_LOG2 0\>/DRAM_CHANNELS_LOG2 1/g' inc/champsim.h
 else
     if [ "$NUM_CORE" -lt "1" ]; then
         echo "Number of core: $NUM_CORE must be greater or equal than 1"
@@ -116,10 +116,10 @@ echo "L2C Prefetcher: ${L2C_PREFETCHER}"
 echo "LLC Prefetcher: ${LLC_PREFETCHER}"
 echo "LLC Replacement: ${LLC_REPLACEMENT}"
 echo "Cores: ${NUM_CORE}"
-BINARY_NAME="${BRANCH}-${L1I_PREFETCHER}-${L1D_PREFETCHER}-${L2C_PREFETCHER}-${LLC_PREFETCHER}-${LLC_REPLACEMENT}-${NUM_CORE}core-$8"
+BINARY_NAME="${BRANCH}-${L1I_PREFETCHER}-${L1D_PREFETCHER}-${L2C_PREFETCHER}-${LLC_PREFETCHER}-${LLC_REPLACEMENT}-${NUM_CORE}core"
 echo "Binary: bin/${BINARY_NAME}"
 echo ""
-mv bin/champsim bin/${LLC_REPLACEMENT}/$9/${BINARY_NAME}
+mv bin/champsim bin/${BINARY_NAME}
 
 
 # Restore to the default configuration
